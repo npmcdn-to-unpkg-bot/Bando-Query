@@ -1,11 +1,12 @@
 //Global Variables
-rectangleArray = new Array();
-markerArray = new Array();
-var spatialQuerySelection = "intersects";
-var dateQuerySelection = "allYears";
-var dateQuerySQL = "";
-var highlight = {color: "#FF0000", weight: 1};
-var defaultColor = {color: "#58d68d", weight: 1};	
+rectangleArray = new Array(); 								//contains all the rectangles created from a succesful query
+markerArray = new Array();									//contains all the markers created from a succesful query
+var spatialQuerySelection = "intersects";					//string of used to decide what spatial query technique will be used 
+var dateQuerySelection = "allYears";						//string used to decide what date query technique will be used 
+var dateQuerySQL = "";										//string of SQL statement to refine search by date
+var highlight = {color: "#FF0000", weight: 1};			//higlight properties of markers/rectangles.
+var defaultColor = {color: "#58d68d", weight: 1};		//default properties of markers/rectangles.
+
 
 //This function is used to delete the active rectangle that the user has drawn.
 //This function is currently not in use, However I'm leaving it here in case in the future the two click method
