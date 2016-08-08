@@ -7,6 +7,9 @@ var dateQuerySQL = "";
 var highlight = {color: "#FF0000", weight: 1};
 var defaultColor = {color: "#58d68d", weight: 1};	
 
+//This function is used to delete the active rectangle that the user has drawn.
+//This function is currently not in use, However I'm leaving it here in case in the future the two click method
+//of drawing the query bounding box is implemented.
 function deleteRectangle()
 {	
 	if(markerCount == 2)
@@ -33,6 +36,7 @@ function deleteRectangle()
 		return null;
 }
 
+//
 function submitQuery(boundingBox)
 {	
 	var authorSQL = generateAuthorInputSQLStatement();
@@ -58,7 +62,7 @@ function submitQuery(boundingBox)
 	rectangleArray = [];
 	markerArray = [];
 	
-	diagonalCoords = addDiagonalObject(boundingBox.getBounds()._southWest.lat,
+	queryObject = addQueryObject(boundingBox.getBounds()._southWest.lat,
 														boundingBox.getBounds()._southWest.lng, 
 														boundingBox.getBounds()._northEast.lat, 
 														boundingBox.getBounds()._northEast.lng,
@@ -74,7 +78,7 @@ function submitQuery(boundingBox)
 	$.ajax({
 		type: 'post',
 		url: '../PHP/submitQuery.php',
-		data:{'diagonalCoords':JSON.stringify(diagonalCoords)},
+		data:{'queryObject':JSON.stringify(queryObject)},
 		success: function(data){
 			if(data == "0 results[]")
 			{
@@ -303,13 +307,13 @@ function generateAuthorInputSQLStatement()
 }
 
 //Object Construction Functions
-function addDiagonalObject(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL)
+function addQueryObject(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL)
 {
-	diagonalObject =  new diagonalObjectConstructor(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL)
+	queryObject =  new queryObjectConstructor(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL)
 	return diagonalObject;
 }
 
-function diagonalObjectConstructor(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL)
+function queryObjectConstructor(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL)
 {
 	this.x1 = x1;
 	this.y1 = y1;
