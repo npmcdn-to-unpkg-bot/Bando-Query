@@ -7,7 +7,6 @@ var dateQuerySQL = "";										//string of SQL statement to refine search by da
 var highlight = {color: "#FF0000", weight: 1};			//higlight properties of markers/rectangles.
 var defaultColor = {color: "#58d68d", weight: 1};		//default properties of markers/rectangles.
 
-
 //This function is used to delete the active rectangle that the user has drawn.
 //This function is currently not in use, However I'm leaving it here in case in the future the two click method
 //of drawing the query bounding box is implemented.
@@ -217,6 +216,7 @@ function deleteTable(id)
 		return;
 	
 	table.deleteRow(table.rows.length-1);
+	document.getElementById("subHeader").innerHTML = "";
 	
 	//recursive call 
 	deleteTable(id);
