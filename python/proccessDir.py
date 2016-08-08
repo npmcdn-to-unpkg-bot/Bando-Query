@@ -1,5 +1,6 @@
 import os, subprocess
 
+
 for f in os.listdir('.'):
     if os.path.isfile(f):
 		extension =  f[-3:]
