@@ -10,7 +10,7 @@ $authorSQL = $queryObject -> authorSQL;
 
 $servername = "localhost";
 $username = "neilgibeaut";
-$password = "Sadiedog1995";
+$password = "PUT_PASSWORD_HERE";
 $database = "spatialsearch_db";
 
 //Create connection
