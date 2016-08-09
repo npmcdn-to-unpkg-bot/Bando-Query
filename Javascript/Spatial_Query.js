@@ -186,6 +186,7 @@ function highlightTable(index)
 	index++;
 	table = document.getElementById("resultsTable");
 	table.rows[index].style.backgroundColor = '#FFFFE0';
+	
 }
 
 //This function recursivly deletes the results table. This function is called when a query is submitted
