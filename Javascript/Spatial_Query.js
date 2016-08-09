@@ -60,7 +60,7 @@ function submitQuery(queryRectangle)
 		success: function(data){
 			if(data == "0 results[]")
 			{
-				alert("No Matches Found");
+				//alert("No Matches Found");
 				document.getElementById("subHeader").innerHTML = "documents found: 0";
 				return;				
 			}
