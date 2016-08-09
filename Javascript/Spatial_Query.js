@@ -3,8 +3,6 @@ var queryRectangle = 0;															//stores the current user drawn rectangle,
 var rectangleArray = new Array(); 											//contains all the rectangles created from a succesful query
 var markerArray = new Array();													//contains all the markers created from a succesful query
 var spatialQuerySelection = "intersects";										//string of used to decide what spatial query technique will be used 
-var dateQuerySelection = "allYears";											//string used to decide what date query technique will be used 
-var dateQuerySQL = "";															//string of SQL statement to refine search by date
 var highlight = {fillOpacity: .1, color: "#FF0000", weight: 1};			//higlight properties of markers/rectangles.
 var defaultColor = {fillOpacity:0, color: "#28b463", weight: 3};		//default properties of markers/rectangles.
 var Clust = "";																			//Global Variable that will hold the Marker Cluster layer
@@ -15,7 +13,8 @@ var Clust = "";																			//Global Variable that will hold the Marker Cl
 //On a succesful AJAX call, drawResults() is called with the information returned from submitQuery.php as a parameter.
 function submitQuery(queryRectangle)
 {	
-	getDateRange();
+	//gets string for sql statement for the date range
+	var dateQuerySQL = getDateRange();
 	var authorSQL = generateAuthorInputSQLStatement();
 
 	if(queryRectangle == null)
@@ -50,7 +49,6 @@ function submitQuery(queryRectangle)
 	{
 		map.removeLayer(rectangleArray[i]);
 		map.removeLayer(Clust);
-		
 	}
 	
 	$.ajax({
@@ -148,7 +146,7 @@ function displayLinks(results)
 	for(var i = 0; i < results.length; i++)
 	{
 		var fileName = results[i].fileName;
-		var row = table.insertRow(-1)
+		var row = table.getElementsByTagName('tbody')[0].insertRow(-1)
 		var cell0 = row.insertCell(0);
 		var cell1 = row.insertCell(1);
 		var cell2 = row.insertCell(2);
@@ -159,6 +157,7 @@ function displayLinks(results)
 		cell3.innerHTML = "<button id = 'showOnMapButton' onclick = 'highlightMapMarker(" + i + ")'>Show On Map</button>";
 	}
 	document.getElementById("subHeader").innerHTML = "documents found: " + results.length;
+	$("#resultsTable").trigger("update");
 }
 
 //This function is used by the "Show On Map" button created by displayLinks(). 
@@ -263,7 +262,7 @@ function getDateRange()
 	max = values[1];
 	
 	dateQuerySQL = "AND LEFT(table1.Date, 4) >= '" + min + "' AND LEFT(table1.Date, 4) <= '" + max + "'";
-
+	return dateQuerySQL;
 }
 
 //Currently is used just to implement the ability to refine search results by author but 
