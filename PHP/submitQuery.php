@@ -24,7 +24,7 @@ if ($conn->connect_error) {
 
 if($spatialQuerySelection == "intersects")
 {
-$sql = "SELECT fileName, x1, y1, x3, y3, kmz, Author
+$sql = "SELECT fileName, x1, y1, x3, y3, kmz, Author, Date
 			FROM table1
 			WHERE MBRIntersects(
 			GeomFromText( 'LINESTRING($y1 $x1, $y2 $x2)' ),
@@ -48,7 +48,7 @@ $conn->close();
 
 if($spatialQuerySelection == "contains")
 {
-$sql = "SELECT fileName, x1, y1, x3, y3, kmz, Author
+$sql = "SELECT fileName, x1, y1, x3, y3, kmz, Author, Date
 			FROM table1
 			WHERE MBRContains(
 			GeomFromText( 'LINESTRING($y1 $x1, $y2 $x2)' ),
@@ -72,7 +72,7 @@ $conn->close();
 
 if($spatialQuerySelection == "containsCentroid")
 {
-$sql = "SELECT fileName, x1, y1, x3, y3, kmz, Author
+$sql = "SELECT fileName, x1, y1, x3, y3, kmz, Author, Date
 			FROM table1
 			WHERE MBRContains(
 			GeomFromText( 'LINESTRING($y1 $x1, $y2 $x2)' ),
