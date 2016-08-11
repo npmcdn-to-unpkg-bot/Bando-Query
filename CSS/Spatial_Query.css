@@ -397,6 +397,48 @@ left:100px;
 #showOnMapButton:hover {
 	background-color:#1e83a0;
 }
+#expandResults{
+	position:absolute;
+	width: 100px;
+	font-family: Georgia,serif,Times;
+    font-weight: normal;
+    font-size: 55%;
+	border-radius: 20px;
+	background-color:#28afd5;
+    color: white;
+    padding: 2px;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
+	z-index:1;
+	border-radius: 20px;
+	left:10px;
+	top:10px;
+}
+#expandResults:hover {
+	background-color:#1e83a0;
+}
+#shrinkResults{
+	position:absolute;
+	width: 100px;
+	font-family: Georgia,serif,Times;
+    font-weight: normal;
+    font-size: 55%;
+	border-radius: 20px;
+	background-color:#28afd5;
+    color: white;
+    padding: 2px;
+    font-size: 10px;
+    border: none;
+    cursor: pointer;
+	z-index:1;
+	border-radius: 20px;
+	left:10px;
+	top:10px;
+}
+#shrinkResults:hover {
+	background-color:#1e83a0;
+}
 
 #slider-range{
 	left:10px;
