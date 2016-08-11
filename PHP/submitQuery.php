@@ -1,4 +1,9 @@
 <?php
+
+/* The purpose of this script is to recieve the JSON query object from the Bando-Query app 
+and perform a query bases on the varaiables in that JSON on the database. This script returns the 
+results of that query to the Bando-Query app in the form of a JSON. */
+
 $queryObject = json_decode($_POST['queryObject']);
 $x1 = $queryObject -> x1;
 $y1 = $queryObject -> y1;
