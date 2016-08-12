@@ -20,7 +20,8 @@ function submitQuery(queryRectangle)
 	//if no rectangle is drawn queryRectangle is set to the maximum bounds of the world map.
 	if(queryRectangle == null)
 	{
-		// deleteTable("resultsTable");
+		// This block right here executes a a search with no results if no rectangle is drawn leaving here for now.
+ 		// deleteTable("resultsTable");					
 		// for(var i = rectangleArray.length; i > 0; i--)
 		// {
 			// map.removeLayer(rectangleArray[i-1]);
@@ -28,7 +29,8 @@ function submitQuery(queryRectangle)
 		// }
 		// rectangleArray = [];
 		// markerArray = [];
-		// return;
+		// return; 
+		
 		var bounds = [[-85, -185], [85, 185]];
 		queryRectangle = L.rectangle(bounds);
 	}
