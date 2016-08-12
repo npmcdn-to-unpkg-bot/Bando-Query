@@ -117,17 +117,8 @@ function drawResults(results)
 			//popup is used to determine the markers index postion in markerArray
 			var popup = this.getPopup();
 			
-			//reset all markers and rectangles to default color
-			for(var i = 0; i < markerArray.length; i++)
-			{
-				rectangleArray[i].setStyle(defaultColor);
-				markerArray[i].setIcon(defaultIcon);
-				table.rows[i+1].style.backgroundColor = "#e5f1fd";
-			}
-			
-			//highlight marker and corresponding rectangle in red
-			rectangleArray[popup.getContent()].setStyle(highlight)
-			this.setIcon(icon);
+			//highlight the marker that was clicked 
+			highlightMapMarker(popup.getContent());
 			
 			//highlights table row that corresponds to index number of clicked marker 
 			highlightTable(popup.getContent());
@@ -164,7 +155,7 @@ function createTable(results)
 		cell1.innerHTML = fileName.substring(0, fileName.length-4);	
 		cell2.innerHTML = results[i].Date;
 		cell3.innerHTML = "<a href = '" + results[i].kmz + "'>" + "kmz" + "</a>" + ", <a href = '" + results[i].GeoTIFF + "'>" + "GeoTIFF" + "</a>";	
-		cell4.innerHTML = "<button id = 'showOnMapButton' onclick = 'highlightMapMarker(" + i + ")'>Show On Map</button>";
+		cell4.innerHTML = "<button id = 'showOnMapButton' onclick = 'showOnMap(" + i + ")'>Show On Map</button>";
 	}
 	// writes the number of documents found to the results page
 	document.getElementById("subHeader").innerHTML = "documents found: " + results.length;
@@ -187,20 +178,28 @@ function highlightMapMarker(index)
 	rectangleArray[index].setStyle(highlight);
 	markerArray[index].setIcon(icon);
 	
-	highlightTable(index);
+	
+	//highlightTable(index);
 	map.fitBounds(rectangleArray[index].getLatLngs(), {padding: [50, 50]}, {animate: true});
 }
 
-/* This function is called within a results marker's click event created in drawResults().
-The purpose of this function is to highlight the entry in the results table that corresponds to the
-results marker that was clicked on. */
+// This function is called within a results marker's click event created in drawResults().
+// The purpose of this function is to highlight the entry in the results table that corresponds to the
+// results marker that was clicked on.
 function highlightTable(index)
 { 
 	index++; //index has to be incremented to acount for table headers
 	
 	table = document.getElementById("resultsTable");
 	table.rows[index].style.backgroundColor = '#FFFFE0';
-	
+}
+
+// This function is called when the showOnMapButton is selected. 
+// The purpose of the function is to execute both the highlightMapMarker and highlightTable functions.
+function showOnMap(index)
+{
+	highlightMapMarker(index);
+	highlightTable(index);
 }
 
 // This function recursivly deletes the results table. This function is called when a query is submitted
