@@ -341,7 +341,9 @@ function resizeResultsTable()
 }
 
 // This function is called by submitQuery it creates a string of an sql statement to perform a search on 
-// all of the fields in the database. This needs further implementation, but i ran out of time before I finished it - Neil 
+// all of the fields in the database. This needs further implementation, but i ran out of time before I finished it. 
+// In the future you may want to implement this as a different SQL statement in submitQuery.php, at the time being
+// it's just appending an AND clause to our already existing query statements - Neil 
 function getKeyWordInput()
 {
 	if(document.getElementById("keyWord").value == "")
