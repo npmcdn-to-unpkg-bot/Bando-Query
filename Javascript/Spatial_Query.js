@@ -16,6 +16,7 @@ function submitQuery(queryRectangle)
 	//gets string for sql statement for the date range
 	var dateQuerySQL = getDateRange();
 	var authorSQL = getAuthorInput();
+	var keyWordSQL = getKeyWordInput();
 	
 	//if no rectangle is drawn queryRectangle is set to the maximum bounds of the world map.
 	if(queryRectangle == null)
@@ -52,7 +53,7 @@ function submitQuery(queryRectangle)
 														queryRectangle.getBounds()._southWest.lng, 
 														queryRectangle.getBounds()._northEast.lat, 
 														queryRectangle.getBounds()._northEast.lng,
-														spatialQuerySelection, dateQuerySQL, authorSQL);
+														spatialQuerySelection, dateQuerySQL, authorSQL, keyWordSQL);
 	
 	$.ajax({
 		type: 'post',
@@ -339,14 +340,27 @@ function resizeResultsTable()
 	}
 }
 
-//Object Construction Functions
-function addQueryObject(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL)
+// This function is called by submitQuery it creates a string of an sql statement to perform a search on 
+// all of the fields in the database. This needs further implementation, but i ran out of time before I finished it - Neil 
+function getKeyWordInput()
 {
-	queryObject =  new queryObjectConstructor(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL)
+	if(document.getElementById("keyWord").value == "")
+	{
+		return "";		
+	}
+	
+	keyWordSQL = "AND Author LIKE '" + document.getElementById("keyWord").value + "'" + " OR fileName LIKE '" + document.getElementById("keyWord").value + "'";
+	return keyWordSQL;	
+}
+
+//Object Construction Functions
+function addQueryObject(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL, keyWordSQL)
+{
+	queryObject =  new queryObjectConstructor(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL, keyWordSQL)
 	return queryObject;
 }
 
-function queryObjectConstructor(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL)
+function queryObjectConstructor(x1, y1, x2, y2, spatialQuerySelection, dateQuerySQL, authorSQL, keyWordSQL)
 {
 	this.x1 = x1;
 	this.y1 = y1;
@@ -355,5 +369,6 @@ function queryObjectConstructor(x1, y1, x2, y2, spatialQuerySelection, dateQuery
 	this.spatialQuerySelection = spatialQuerySelection;
 	this.dateQuerySQL = dateQuerySQL;
 	this.authorSQL = authorSQL;
+	this.keyWordSQL = keyWordSQL;
 }
 
