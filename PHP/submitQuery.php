@@ -15,8 +15,8 @@ $authorSQL = $queryObject -> authorSQL;
 $keyWordSQL = $queryObject -> keyWordSQL;
 
 $servername = "localhost";
-$username = "neilgibeaut";
-$password = "Sadiedog1995";
+$username = "";
+$password = "";
 $database = "spatialsearch_db";
 
 //Create connection
